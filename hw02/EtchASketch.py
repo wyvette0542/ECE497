@@ -6,38 +6,38 @@ import time
 
 # Set up the frame
 pygame.init()
-size = [1000, 1000]
+size = [500, 500]
 frame = pygame.display.set_mode(size)
-frame.fill(WHITE)
+frame.fill((255, 255, 255))
 pygame.display.set_caption("Use arrow key to move. Press 'd' to toggle delete mode.")
 
 # Initialize the x, y position
-currentX = 10
-currentY = 10
+currentX = 1
+currentY = 1
 
 # Set up buttons
 Button_List = ["GP3_17", "GP3_20", "GP1_17", "GP1_25"]
 for Button in Button_List:
-  GPIO.setup(Left, GPIO.OUT)
+  GPIO.setup(Left, GPIO.INPUT)
 
 while True: 
   time.sleep(100)
-  pygame.draw.circle(frame, BLACK, [currentX, currentY], 1)
+  pygame.draw.circle(frame, (0, 0, 0), [currentX, currentY], 1)
   pygame.display.update()
-  if GPIO.input("GP3_17") and currentX > 0:
+  if not GPIO.input("GP3_17") and currentX > 0:
     currentX -= 1
-  if GPIO.input("GP3_20") and currentY < 999:
+  if not GPIO.input("GP3_20") and currentY < 499:
     currentY += 1
-  if GPIO.input("GP1_17") and currentY > 0:
+  if not GPIO.input("GP1_17") and currentY > 0:
     currentY -= 1
-  if GPIO.input("GP1_25") and currentY < 999:
+  if not GPIO.input("GP1_25") and currentY < 499:
     currentY += 1
 
-  for event in pygame.event.get(): 
-    if event.type == bygame.QUIT: 
+  for event in pygame.event.get():
+    if event.type == pygame.QUIT:
       sys.exit()
     elif event.type == KEYDOWN and event.key == K_d: 
-      pygame.draw.circle(frame, WHITE, [currentX, currentY], 1)
+      pygame.fill((255, 255, 255))
 
 
 
