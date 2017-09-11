@@ -1,11 +1,11 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 import pygame, sys
 from pygame.locals import *
 import Adafruit_BBIO.GPIO as GPIO
 import time
 
 # Set up the frame
-bygame.init()
+pygame.init()
 size = [1000, 1000]
 frame = pygame.display.set_mode(size)
 frame.fill(WHITE)
