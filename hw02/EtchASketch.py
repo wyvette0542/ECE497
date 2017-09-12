@@ -1,8 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import pygame, sys
 from pygame.locals import *
 import Adafruit_BBIO.GPIO as GPIO
-import time
 
 # Set up the frame
 pygame.init()
@@ -12,32 +11,41 @@ frame.fill((255, 255, 255))
 pygame.display.set_caption("Use arrow key to move. Press 'd' to toggle delete mode.")
 
 # Initialize the x, y position
-currentX = 1
-currentY = 1
+currentX = 20
+currentY = 20
+
+clock = pygame.time.Clock()
 
 # Set up buttons
-Button_List = ["GP3_17", "GP3_20", "GP1_17", "GP1_25"]
-for Button in Button_List:
-  GPIO.setup(Left, GPIO.INPUT)
+Left = "GP0_6"
+Up = "GP0_5"
+Down = "GP0_4"
+Right = "GP0_3"
+GPIO.setup(Left, GPIO.IN)
+GPIO.setup(Up, GPIO.IN)
+GPIO.setup(Down, GPIO.IN)
+GPIO.setup(Right, GPIO.IN)
 
 while True: 
-  time.sleep(100)
-  pygame.draw.circle(frame, (0, 0, 0), [currentX, currentY], 1)
+  clock.tick(10)
+  pygame.draw.circle(frame, (0, 0, 0), [currentX, currentY], 2)
   pygame.display.update()
-  if not GPIO.input("GP3_17") and currentX > 0:
-    currentX -= 1
-  if not GPIO.input("GP3_20") and currentY < 499:
-    currentY += 1
-  if not GPIO.input("GP1_17") and currentY > 0:
-    currentY -= 1
-  if not GPIO.input("GP1_25") and currentY < 499:
-    currentY += 1
+  # Determine movement
+  if GPIO.input(Left) and currentX > 1:
+    currentX -= 2
+  if GPIO.input(Down) and currentY < 498:
+    currentY += 2
+  if not GPIO.input(Up) and currentY > 1:
+    currentY -= 2
+  if not  GPIO.input(Right) and currentX < 498:
+    currentX += 2
 
+  # Click QUIT to quit the game and press 'd' from the keyboard to delete
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
       sys.exit()
     elif event.type == KEYDOWN and event.key == K_d: 
-      pygame.fill((255, 255, 255))
+      frame.fill((255, 255, 255))
 
 
 
