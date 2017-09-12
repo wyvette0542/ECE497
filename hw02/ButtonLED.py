@@ -3,32 +3,18 @@ import Adafruit_BBIO.GPIO as GPIO
 import time
 
 # Set up LEDs
-LED1 = "GREEN"
-LED2 = "RED"
-LED3 = "GP1_4"
-LED4 = "GP1_3"
-GPIO.setup(LED1, GPIO.OUT)
-GPIO.setup(LED2, GPIO.OUT)
-GPIO.setup(LED3, GPIO.OUT)
-GPIO.setup(LED4, GPIO.OUT)
+LED_List = ["GREEN", "RED", "GP1_4", "GP1_3"]
+for LED in LED_List:
+    GPIO.setup(LED, GPIO.OUT)
+    GPIO.output(LED, 1)
 
 #Set up Buttons
-Button1 = "GP0_6"
-Button2 = "GP0_5"
-Button3 = "GP0_4"
-Button4 = "GP0_3"
-GPIO.setup(Button1, GPIO.IN)
-GPIO.setup(Button2, GPIO.IN)
-GPIO.setup(Button3, GPIO.IN)
-GPIO.setup(Button4, GPIO.IN)
-
-GPIO.output(LED1, 1)
-GPIO.output(LED2, 1)
-GPIO.output(LED3, 1)
-GPIO.output(LED4, 1)
+Button_List = ["GP0_6", "GP0_5", "GP0_4", "GP0_3"]
+for Button in Button_List:
+    GPIO.setup(Button, GPIO.IN)
 
 # Map buttons to LEDs
-map = {Button1: LED1, Button2: LED2, Button3: LED3, Button4: LED4}
+map = {Button_List[0]: LED_List[0], Button_List[1]: LED_List[1], Button_List[2]: LED_List[2], Button_List[3]: LED_List[3]}
 
 def updateLED(channel):
   print("channel = " + channel)
@@ -36,11 +22,8 @@ def updateLED(channel):
   GPIO.output(map[channel], state)
   print(map[channel] + " Toggled")
 
-
-GPIO.add_event_detect(Button1, GPIO.BOTH, callback=updateLED)
-GPIO.add_event_detect(Button2, GPIO.BOTH, callback=updateLED)
-GPIO.add_event_detect(Button3, GPIO.BOTH, callback=updateLED)
-GPIO.add_event_detect(Button4, GPIO.BOTH, callback=updateLED)
+for Button in Button_List:
+    GPIO.add_event_detect(Button, GPIO.BOTH, callback = updateLED)
 
 try:
   while True:
