@@ -43,7 +43,7 @@ while True:
 		currentY -= 1
 	if GPIO.input(Left) and currentX < 7:
 		currentX += 1
-	if not GPIO.input(Clean) | temp > 0x1c: # To clean up the frame, clean button pushed or temp exceed 28C/82.4F
+	if not GPIO.input(Clean) or temp > 28: # To clean up the frame, clean button pushed or temp exceed 28C/82.4F
 		for i in range(0, 16): 
 			game[i] = 0x00		
 	game[2 * currentX + 1] = pow(2, currentY) # Cursor position
