@@ -25,7 +25,7 @@ def printTemp(x):
 def printWarning(x):
 	print("Temperature is out of range!")
 
-# Set Thigh = 29C and Tlow = 23C, set TM = 1 in interrupt mode
+# Set Thigh = 29C and Tlow = 23C, set TM = 0 in compare mode
 bus.write_byte_data(addressR, 3, 0x1d)
 bus.write_byte_data(addressR, 2, 0x1a)
 bus.write_byte_data(addressR, 1, 0x80)
