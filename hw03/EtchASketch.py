@@ -34,6 +34,7 @@ while True:
 	time.sleep(0.1)
 	game[2 * currentX] = game[2 * currentX] | game[2 * currentX + 1]
 	game[2 * currentX + 1] = 0x00
+	temp = bus.read_byte_data(0x48, 0)
 	if not GPIO.input(Right) and currentX > 0:
 		currentX -= 1
 	if GPIO.input(Down) and currentY < 7:
@@ -42,9 +43,9 @@ while True:
 		currentY -= 1
 	if GPIO.input(Left) and currentX < 7:
 		currentX += 1
-	if not GPIO.input(Clean):
+	if not GPIO.input(Clean) | temp > 0x1c: # To clean up the frame, clean button pushed or temp exceed 28C/82.4F
 		for i in range(0, 16): 
-			game[i] = 0x00
+			game[i] = 0x00		
 	game[2 * currentX + 1] = pow(2, currentY) # Cursor position
 	bus.write_i2c_block_data(matrix, 0, game)
 
