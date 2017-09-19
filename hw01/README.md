@@ -8,3 +8,8 @@
 	Use the arrow keys to control the movement to draw "X". 
 	Press "d" to enter or exit the "clean mod", and use arrow keys to move to where you want to erase. 
 	
+
+// Comment from Prof. Yoder
+// I need java install instructions
+// Plese demo in class
+// Grade:  7/10
