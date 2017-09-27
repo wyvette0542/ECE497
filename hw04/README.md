@@ -2,9 +2,11 @@
 
 mmap
 
-For part 1 of hw04, I used two buttons at GPIO_49 and GPIO_113. GPIO_113 controls the LED at USR2 and GPIO_49 controls the LED at USR3. Both LEDs are internal LED. 
+The pdf file is the memory map of BeagleBone. 
 
-For part 2 of hw04, I modified gpioThru.c so the button at GPIO_49 will be used to toggle the LED at USR2. 
+For part 1, I used two buttons at GPIO_49 and GPIO_113. GPIO_113 controls the LED at USR2 and GPIO_49 controls the LED at USR3. Both LEDs are internal LED. 
+
+For part 2, I modified gpioThru.c so the button at GPIO_49 will be used to toggle the LED at USR2. 
 
 Etch-A-Sketch
 
