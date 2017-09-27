@@ -34,7 +34,7 @@ while True:
 	time.sleep(0.1)
 	game[2 * currentX] = game[2 * currentX] | game[2 * currentX + 1]
 	game[2 * currentX + 1] = 0x00
-	temp = bus.read_byte_data(0x48, 0)
+	temp = bus.read_byte_data(0x49, 0)
 	if not GPIO.input(Right) and currentX > 0:
 		currentX -= 1
 	if GPIO.input(Down) and currentY < 7:
