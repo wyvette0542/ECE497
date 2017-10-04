@@ -112,25 +112,20 @@ function LEDclick(i, j) {
         for (i = 0; i < disp.length; i++) {
             // j cycles through each bit
             for (j = 0; j < 8; j++) {
-                if (((disp[i] >> j) & 0x1) === 1) {
-                    if (((disp[i] >> j) & 0x1) === 1) {
-                        $('#id' + i + '_' + j).addClass('Both');
-                        $('#id' + i + '_' + j).removeClass('G');
-                        $('#id' + i + '_' + j).removeClass('R');
-                    } else {
-                        $('#id' + i + '_' + j).removeClass('Both');
-                        $('#id' + i + '_' + j).addClass('G');
-                        $('#id' + i + '_' + j).removeClass('R');
+                if (((disp[i] >> j) & 0x1) === 0) && (((disp[i+1] >> j) & 0x1) === 1) {
+                    $('#id' + i + '_' + j).addClass('R');
                 } else {
-                    if ((disp[i] >> j) & 0x1) === 1) {
-                        $('#id' + i + '_' + j).removeClass('Both');
-                        $('#id' + i + '_' + j).removeClass('G');
-                        $('#id' + i + '_' + j).addClass('R');
-                    } else {
-                        $('#id' + i + '_' + j).removeClass('Both');
-                        $('#id' + i + '_' + j).removeClass('G');
-                        $('#id' + i + '_' + j).removeClass('R');
-                    }
+                    $('#id' + i + '_' + j).removeClass('R');    
+                }
+                if (((disp[i] >> j) & 0x1) === 1) && (((disp[i+1] >> j) & 0x1) === 1) {
+                    $('#id' + i + '_' + j).addClass('Both');
+                } else {
+                    $('#id' + i + '_' + j).removeClass('Both');    
+                }
+                if (((disp[i] >> j) & 0x1) === 1) && (((disp[i+1] >> j) & 0x1) === 0) {
+                    $('#id' + i + '_' + j).addClass('G');
+                } else {
+                    $('#id' + i + '_' + j).removeClass('G');    
                 }
             }
         }
