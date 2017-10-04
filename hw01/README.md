@@ -12,4 +12,5 @@
 // Comment from Prof. Yoder
 // I need java install instructions
 // Plese demo in class
-// Grade:  7/10
+//	Thanks for the demo
+// Grade:  10/10

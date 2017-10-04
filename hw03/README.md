@@ -7,3 +7,7 @@ One of the TMP101 is at 0x48 and the other one is at 0x49. For #2, the shell com
 Etch-a-sketch
 
 The four buttons connected to GP0 is used to control the movement. A seperate button connected to GP1_4 is used to clean the frame. Also, if the temperature of 0x48 TMP101 exceeds 28C/82.4F, the frame will clean up. 
+
+# Comments from Prof. Yoder
+# Looks good.  Nice instructions.
+# Grade:  10/10
