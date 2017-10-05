@@ -26,7 +26,6 @@ function LEDclick(i, j) {
     if (disp[2*i] >> j & 0x1 === 1) {
         if (disp[2*i+1] >> j & 0x1 === 1) { // Both green and red are on
             $('#id'+i+'_'+j).removeClass('orange'); 
-            $('#id'+i+'_'+j).addClass('green'); 
             disp[2*i] ^= 0x1 << j;  
             disp[2*i+1] ^= 0x1 << j;
             socket.emit('i2cset', {i2cNum: i2cNum, i: i*2, disp: '0x'+disp[2*i].toString(16)});
@@ -46,7 +45,7 @@ function LEDclick(i, j) {
             disp[2*i] ^= 0x1 << j;
             socket.emit('i2cset', {i2cNum: i2cNum, i: i*2, disp: '0x'+disp[2*i].toString(16)});
         } else { // Both green and red are off
-            $('#id'+i+'_'+j).addClass('green'); 
+	    $('#id'+i+'_'+j).addClass('green');
             disp[2*i] ^= 0x1 << j;
             socket.emit('i2cset', {i2cNum: i2cNum, i: i*2, disp: '0x'+disp[2*i].toString(16)});
         }
