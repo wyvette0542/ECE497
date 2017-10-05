@@ -26,7 +26,6 @@ function LEDclick(i, j) {
     if (disp[2*i] >> j & 0x1 === 1) {
         if (disp[2*i+1] >> j & 0x1 === 1) { // Both green and red are on
             $('#id'+i+'_'+j).removeClass('orange'); 
-            $('#id'+i+'_'+j).addClass('green'); 
             disp[2*i] ^= 0x1 << j;  
             disp[2*i+1] ^= 0x1 << j;
             socket.emit('i2cset', {i2cNum: i2cNum, i: i*2, disp: '0x'+disp[2*i].toString(16)});
@@ -46,7 +45,7 @@ function LEDclick(i, j) {
             disp[2*i] ^= 0x1 << j;
             socket.emit('i2cset', {i2cNum: i2cNum, i: i*2, disp: '0x'+disp[2*i].toString(16)});
         } else { // Both green and red are off
-            $('#id'+i+'_'+j).addClass('green'); 
+	    $('#id'+i+'_'+j).addClass('green');
             disp[2*i] ^= 0x1 << j;
             socket.emit('i2cset', {i2cNum: i2cNum, i: i*2, disp: '0x'+disp[2*i].toString(16)});
         }
@@ -115,21 +114,19 @@ function LEDclick(i, j) {
         // i cycles through each column
         for (i = 0; i < disp.length; i++) {
             // j cycles through each bit
-            if ((disp[2*i] >> j & 0x1 === 1) && (disp[2*i+1] >>j & 0x1 === 1)) { // Both green and red are on
-                $('#id'+i/2+'_'+j).addClass('orange');
-            } else {
-                $('#id'+i/2+'_'+j).removeClass('orange');
+            for (j = 0; j < 8; j++) {
+                if ((disp[2*i] >> j & 0x1 === 1) && (disp[2*i+1] >> j & 0x1 === 1)) { 
+                    $('#id'+i+'_'+j).addClass('orange');
+                }else if ((disp[2*i] >> j & 0x1 === 1) && (disp[2*i+1] >> j & 0x1 !== 1)) {
+                    $('#id'+i+'_'+j).addClass('green');
+                } else if ((disp[2*i] >> j & 0x1 !== 1) && (disp[2*i+1] >> j & 0x1 === 1)) {
+                    $('#id'+i+'_'+j).addClass('red');
+                } else {
+                    $('#id'+i+'_'+j).removeClass('green');
+                    $('#id'+i+'_'+j).removeClass('red');
+                    $('#id'+i+'_'+j).removeClass('orange');
+                }  
             }
-            if ((disp[2*i] >> j & 0x1 === 1) && (disp[2*i+1] >>j & 0x1 === 0)) { // Green is on and red is off
-                $('#id'+i/2+'_'+j).addClass('green');
-            } else {
-                $('#id'+i/2+'_'+j).removeClass('green');
-            }
-            if ((disp[2*i] >> j & 0x1 === 0) && (disp[2*i+1] >>j & 0x1 === 1)) {  // Red is on and green is off
-                $('#id'+i/2+'_'+j).addClass('red');
-            } else {
-                $('#id'+i/2+'_'+j).removeClass('red');
-            }  
         }
     }
 
