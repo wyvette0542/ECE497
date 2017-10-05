@@ -117,9 +117,9 @@ function LEDclick(i, j) {
             for (j = 0; j < 8; j++) {
                 if ((disp[2*i] >> j & 0x1 === 1) && (disp[2*i+1] >> j & 0x1 === 1)) { 
                     $('#id'+i+'_'+j).addClass('orange');
-                }else if ((disp[2*i] >> j & 0x1 === 1) && (disp[2*i+1] >> j & 0x1 !== 1)) {
+                } else if (disp[2*i] >> j & 0x1 === 1) {
                     $('#id'+i+'_'+j).addClass('green');
-                } else if ((disp[2*i] >> j & 0x1 !== 1) && (disp[2*i+1] >> j & 0x1 === 1)) {
+                } else if (disp[2*i+1] >> j & 0x1 === 1) {
                     $('#id'+i+'_'+j).addClass('red');
                 } else {
                     $('#id'+i+'_'+j).removeClass('green');
