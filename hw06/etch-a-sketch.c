@@ -72,17 +72,22 @@ int main(int argc, char *argv[])
     if (argc == 2) {
         width = atoi(argv[1]);
         if (width < 0 || width > 50) {
+            width = 1;
             perror("Error: width is out of range!\n");
         }
     } else if (argc == 5) {
         width = atoi(argv[1]);
         if (width < 0 || width > 50) {
+            width = 1;
             perror("Error: width is out of range!\n");
         }
         r = atoi(argv[2]);
         g = atoi(argv[3]);
         b = atoi(argv[4]);
         if (r < 0 || g < 0 || b < 0 || r > 31 || g > 63 || b > 31) {
+            r = 0; 
+            g = 0; 
+            b = 0;
             perror("Error: Your RGB color number is undefined.\n");
         }
     } else if (argc > 2 && argc != 5) {
@@ -132,13 +137,15 @@ int main(int argc, char *argv[])
         
         if((x != xold) || (y != yold)) {
             printf("Updating location to %d, %d\n", x, y);
-            // Set old location
+            
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < width; j++) {
+                    // Set old location
                     location = (xold+i+vinfo.xoffset) * (vinfo.bits_per_pixel/8) + (yold+j+vinfo.yoffset) * finfo.line_length;
                     unsigned short int t = r<<11 | g << 5 | b;
                     *((unsigned short int*)(fbp + location)) = t;
                     
+                    // Set new location (cursor)
                     location = (x+i+vinfo.xoffset) * (vinfo.bits_per_pixel/8) + (y+j+vinfo.yoffset) * finfo.line_length;
                     *((unsigned short int*)(fbp + location)) = 0x10;
                 }
