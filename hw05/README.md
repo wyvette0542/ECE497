@@ -14,18 +14,7 @@ Short Answers:
 
 All the files related to bone demo is in the folder "realtime", I only copied the three files about matrixLED, where I made modifications, out. The matrixLED files in the realtime folder and out of that folder are the same version. 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Comments from Prof. Yoder
+# Found your answers to the questions.  They look good.
+# Thanks for the demo.
+# Grade:  10/10
