@@ -135,21 +135,16 @@ int main(int argc, char *argv[])
             // Set old location
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < width; j++) {
-                    location = (xold+vinfo.xoffset) * (vinfo.bits_per_pixel/8) + (yold+vinfo.yoffset) * finfo.line_length;
+                    location = (xold+i+vinfo.xoffset) * (vinfo.bits_per_pixel/8) + (yold+j+vinfo.yoffset) * finfo.line_length;
                     unsigned short int t = r<<11 | g << 5 | b;
                     *((unsigned short int*)(fbp + location)) = t;
                     
-                    xold = x + j;
-                    yold = y + i;
-                    
-                    if (xold > 315 || xold < 1 || yold > 235 || yold < 1) {
-                        break;
-                    }
-                    
-                    location = (x+j+vinfo.xoffset) * (vinfo.bits_per_pixel/8) + (y+i+vinfo.yoffset) * finfo.line_length;
-                    *((unsigned short int*)(fbp + location)) = 0xff;
+                    location = (x+i+vinfo.xoffset) * (vinfo.bits_per_pixel/8) + (y+j+vinfo.yoffset) * finfo.line_length;
+                    *((unsigned short int*)(fbp + location)) = 0x10;
                 }
             }
+            xold = x;
+            yold = y;
         }
 		
 		rc_usleep(5000);
