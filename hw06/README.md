@@ -18,4 +18,4 @@ I was able to put my name and other texts on the LCD display.
 
 Etch-A-Sketch
 
-It allows the player to put 4 arguments when running the game. The first argument is the width of the line which player desires and the rest 3 arguments are the RGB numbers the player wants. All input arguments are optional and the default width is 1 and color is black (r = 0, g = 0, b = 0). Then the game will draw lines with the width and color chosen from the player. 
+It allows the player to put 4 arguments when running the game. The first argument is the width of the line which player desires and the rest 3 arguments are the RGB numbers the player wants. All input arguments are optional and the default width is 1 and color is black (r = 0, g = 0, b = 0). Then the game will draw lines with the width and color chosen by the player. 
