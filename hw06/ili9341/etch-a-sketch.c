@@ -133,19 +133,23 @@ int main(int argc, char *argv[])
         if((x != xold) || (y != yold)) {
             printf("Updating location to %d, %d\n", x, y);
             // Set old location
-            for (int i = -width; i <= width; i++) {
-                for (int j = -width; j <= width; j++) {
-                    location = (xold+j+vinfo.xoffset) * (vinfo.bits_per_pixel/8) + (yold+i+vinfo.yoffset) * finfo.line_length;
+            for (int i = 0; i < width; i++) {
+                for (int j = 0; j < width; j++) {
+                    location = (xold+vinfo.xoffset) * (vinfo.bits_per_pixel/8) + (yold+vinfo.yoffset) * finfo.line_length;
                     unsigned short int t = r<<11 | g << 5 | b;
                     *((unsigned short int*)(fbp + location)) = t;
+                    
+                    xold = x + j;
+                    yold = y + i;
+                    
+                    if (xold > 315 || xold < 1 || yold > 235 || yold < 1) {
+                        break;
+                    }
                     
                     location = (x+j+vinfo.xoffset) * (vinfo.bits_per_pixel/8) + (y+i+vinfo.yoffset) * finfo.line_length;
                     *((unsigned short int*)(fbp + location)) = 0xff;
                 }
             }
-            
-            xold = x+width;
-            yold = y+width;
         }
 		
 		rc_usleep(5000);
