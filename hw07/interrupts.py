@@ -14,7 +14,7 @@ map = {button: LED}
 def updateLED(channel):
 	print("channel = " + channel)
 	state = GPIO.input(channel)
-	GPIO.output(mat[channel], state)
+	GPIO.output(map[channel], state)
 	print(map[channel] + " Toggled")
 
 print("Running...")
