@@ -19,3 +19,8 @@ Oscilloscope screen capture with annotations of the three method.
 Report.docx
 
 The ovarall report presents my results. 
+
+// Comments from Prof. Yoder
+// Results look good, though I wanted min, max and average time.
+// Project page needs updating
+// Grade:  7/10
